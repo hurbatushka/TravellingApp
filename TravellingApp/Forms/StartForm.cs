@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TravellingApp.Forms;
+using TravellingApp;
 
 namespace TravellingApp
 {
@@ -30,8 +30,7 @@ namespace TravellingApp
             // если наш прогресс бар заполнен, тогда открываем форму, иначе делаем загрузку данных, в нашем случае только имитацию
             if (guna2ProgressBar1.Value == 100)
             {
-                //new MainForm().Show();
-                new Main().Show();
+                new MainForm().Show();
                 Hide();
             }
             else

@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Guna.UI2.WinForms;
+using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.OleDb;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -10,9 +14,27 @@ namespace TravellingApp
     {
         private bool isEditMode = false; // Флаг режима редактирования
 
+        string connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=database.mdb;";
+        private OleDbConnection myConnection;
+
         public MainForm()
         {
             InitializeComponent();
+
+
+            // Создание подключения и открытие БД.
+            myConnection = new OleDbConnection(connectionString);
+            myConnection.Open();
+
+            // Запрос на отображение.
+            string query = "SELECT * FROM [Санатории]";
+
+            // Занесение в таблицу.
+            OleDbDataAdapter adapter = new OleDbDataAdapter(query, myConnection);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+
+            guna2DataGridViewTravelingInfo.DataSource = dataTable;
 
             // Скрыть элементы при запуске формы
             label1.Visible = false;
